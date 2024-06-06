@@ -1,20 +1,80 @@
 import tkinter as tk
 import tkinter.font as tkFont
 
+ent_note_search: tk.Entry
+btn_new_note: tk.Button
+btn_delete_note: tk.Button
+btn_move_note: tk.Button
+btn_setting_notes: tk.Button
+list_notes: tk.Listbox
+
+ent_attach_search: tk.Entry
+btn_new_attach: tk.Button
+btn_delete_attach: tk.Button
+btn_edit_attach: tk.Button
+btn_move_attach: tk.Button
+btn_setting_attach: tk.Button
+list_attach: tk.Listbox
+txt_attach: tk.Text
+lbl_attach_info: tk.Label
 
 
 #function set option new tkinter widget
 def set_widget_options(app: tk.Tk, widget, grid_col, grid_row, col_pad, row_pad):
+    app.columnconfigure(0, weight=0)
+    app.columnconfigure(1, weight=0)
+    app.columnconfigure(2, weight=0)
+    app.columnconfigure(3, weight=0)
+
+    app.columnconfigure(4, weight=20)
+    app.columnconfigure(5, weight=20)
+    app.columnconfigure(6, weight=20)
+    app.columnconfigure(7, weight=20)
+    app.columnconfigure(8, weight=20)
+    app.rowconfigure(6, weight=0)
+    app.rowconfigure(7, weight=0)
+
     widget.grid(row=grid_row, column=grid_col)
     widget.grid(columnspan=col_pad, rowspan=row_pad)
     widget.grid(sticky="nsew")
 
-    app.grid_columnconfigure(grid_col, weight=1)
-    app.grid_columnconfigure(grid_row, weight=1)
 
+#create all widget in main window
 def create_widgets(app: tk.Tk):
-    ent_note_search_note = tk.Entry(app)
-    
+    global ent_note_search
+    global btn_new_note
+    global btn_delete_note
+    global btn_move_note
+    global btn_setting_notes
+    global list_notes
+
+    global ent_attach_search
+    global btn_new_attach
+    global btn_delete_attach
+    global btn_move_attach
+    global btn_edit_attach
+    global btn_setting_attach
+    global list_attach
+    global txt_attach
+    global lbl_attach_info
+
+    ent_note_search = tk.Entry(app)
+    btn_new_note = tk.Button(app, text="N")
+    btn_delete_note = tk.Button(app, text="D")
+    btn_move_note = tk.Button(app, text="M")
+    btn_setting_notes = tk.Button(app, text="S")
+    list_notes = tk.Listbox(app)
+
+    ent_attach_search = tk.Entry(app)
+    btn_new_attach = tk.Button(app, text="N")
+    btn_delete_attach = tk.Button(app, text="D")
+    btn_move_attach = tk.Button(app, text="M")
+    btn_edit_attach = tk.Button(app, text="E")
+    btn_setting_attach = tk.Button(app, text="S")
+    list_attach = tk.Listbox(app)
+    txt_attach = tk.Text(app)
+    lbl_attach_info = tk.Label(app)
+
 
 #create main application loop
 main_app = tk.Tk()
@@ -26,24 +86,23 @@ main_app.title("Lite Note")
 main_app.option_add('*Font', default_font)
 
 #create and config all widget
-set_widget_options(main_app, ent_note_search_note, 0, 0, 5, 1)
+create_widgets(main_app)
 
-btn_new_note = tk.Button(main_app, text="N")
+set_widget_options(main_app, ent_note_search, 0, 0, 4, 1)
 set_widget_options(main_app, btn_new_note, 0, 1, 1, 1)
-
-btn_delete_note = tk.Button(main_app, text="D")
 set_widget_options(main_app, btn_delete_note, 1, 1, 1, 1)
+set_widget_options(main_app, btn_move_note, 2, 1, 1, 1)
+set_widget_options(main_app, btn_setting_notes, 3, 1, 1, 1)
+set_widget_options(main_app, list_notes, 0, 2, 4, 6)
 
-btn_open_notes_folder = tk.Button(main_app, text="O")
-set_widget_options(main_app, btn_open_notes_folder, 2, 1, 1, 1)
+set_widget_options(main_app, ent_attach_search, 4, 0, 5, 1)
+set_widget_options(main_app, btn_new_attach, 4, 1, 1, 1)
+set_widget_options(main_app, btn_delete_attach, 5, 1, 1, 1)
+set_widget_options(main_app, btn_move_attach, 6, 1, 1, 1)
+set_widget_options(main_app, btn_edit_attach, 7, 1, 1, 1)
+set_widget_options(main_app, btn_setting_attach, 8, 1, 1, 1)
+set_widget_options(main_app, list_attach, 4, 2, 5, 4)
+set_widget_options(main_app, txt_attach, 4, 6, 5, 2)
 
-btn_move_note = tk.Button(main_app, text="M")
-set_widget_options(main_app, btn_move_note, 3, 1, 1, 1)
-
-btn_setting_notes = tk.Button(main_app, text="S")
-set_widget_options(main_app, btn_setting_notes, 4, 1, 1, 1)
-
-list_notes = tk.Listbox(main_app)
-set_widget_options(main_app, list_notes, 0, 2, 5, 1)
 
 main_app.mainloop()
